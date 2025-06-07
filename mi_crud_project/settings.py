@@ -33,7 +33,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-STATIC_URL = '/static/'
+FORCE_SCRIPT_NAME = '/app'
+STATIC_URL = '/app/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Carpeta donde se recopilan los archivos estáticos
 
 
