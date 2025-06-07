@@ -33,6 +33,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+STATIC_ROOT = '/inetpub/wwwroot/app/finance_advisor_360_back/static/'
+STATIC_URL = '/app/finance_advisor_360_back/static/'
+
 
 # Application definition
 
