@@ -156,22 +156,22 @@ class FinancialAnalysisView(APIView):
         """
 
         # Llamada a la API de OpenAI
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[
-                {
-                    "role": "system", 
-                    "content": (content)
-                },
-                {   
-                    "role": "user", 
-                    "content": prompt
-                }
-            ]
-        )
+        # response = openai.ChatCompletion.create(
+        #     model="gpt-4",
+        #     messages=[
+        #         {
+        #             "role": "system", 
+        #             "content": (content)
+        #         },
+        #         {   
+        #             "role": "user", 
+        #             "content": prompt
+        #         }
+        #     ]
+        # )
 
-        result = response.choices[0].message["content"]
-        # result = 'Primero, vamos a analizar la estructura financiera de esta empresa.\n\nLa estructura financiera depende de cómo se financian los activos de la empresa. Los activos totales de la empresa son aproximadamente 1,955,136,056.00 y se financian tanto con deuda (pasivos que suman 1,333,581,556.00) como con capital propio (patrimonio de 621,554,500.00). Esto significa que la empresa está financiada aproximadamente al 68.2% con fondos prestados y el 31.8% restante con fondos propios. Debe tenerse en cuenta que una estructura financiera con alto nivel de deuda puede ser riesgosa y, a largo plazo, se debe buscar un equilibrio financiero mejor.\n\nEn términos de liquidez, la empresa parece tener suficientes activos corrientes (363,414,056.00) para cubrir sus pasivos corrientes (497,327,500.00), aunque la relación activo corriente / pasivo corriente de 0.73 indica que la empresa puede tener dificultades para cumplir con sus obligaciones a corto plazo. \n\nLa solvencia, que considera tanto los pasivos corrientes como no corrientes, parece saludable con una relación de activo total / deuda total de aproximadamente 1.47, lo que indica que la empresa tiene más activos que deudas. Sin embargo, gran parte de esta solvencia proviene de activos no corrientes.\n\nEn cuanto a la rentabilidad, no tenemos suficiente información para hacer una evaluación adecuada. Sería útil conocer las ganancias antes de intereses, impuestos, depreciación y amortización (EBITDA), y por supuesto, las ventas netas.\n\nAhora, algunas recomendaciones para mejorar la situación financiera de la empresa:\n\n1. Reducir la Deuda: Dado que la empresa tiene una cantidad significativa de deuda, podría dirigir un mayor porcentaje de sus ganancias futuras hacia la reducción de la deuda. Aunque el endeudamiento puede ser un instrumento útil para financiar operaciones y crecimiento, un nivel de endeudamiento demasiado elevado puede llevar al colapso financiero.\n\n2. Mejorar la gestión del capital de trabajo: La empresa puede buscar optimizar su gestión del capital de trabajo. Por ejemplo, puede tratar de acelerar las cobranzas (cuentas por cobrar) para mejorar su liquidez. También puede considerar maneras de reducir los niveles de inventario sin comprometer las ventas.\n\n3. Inversiones Inteligentes: Dado que la empresa tiene un monto considerable en propiedades, planta y equipo, podría explorar oportunidades para maximizar su rentabilidad, apalancando estos activos, posiblemente a través de la digitalización, modernización o la optimización de sus procesos y operaciones.\n\nDe igual manera, dada la situación de la empresa, podría ser prudente pausar o disminuir temporalmente cualquier expansión significativa hasta que su flujo de efectivo operativo mejore y los niveles de deuda se reduzcan.'
+        # result = response.choices[0].message["content"]
+        result = 'Primero, vamos a analizar la estructura financiera de esta empresa.\n\nLa estructura financiera depende de cómo se financian los activos de la empresa. Los activos totales de la empresa son aproximadamente 1,955,136,056.00 y se financian tanto con deuda (pasivos que suman 1,333,581,556.00) como con capital propio (patrimonio de 621,554,500.00). Esto significa que la empresa está financiada aproximadamente al 68.2% con fondos prestados y el 31.8% restante con fondos propios. Debe tenerse en cuenta que una estructura financiera con alto nivel de deuda puede ser riesgosa y, a largo plazo, se debe buscar un equilibrio financiero mejor.\n\nEn términos de liquidez, la empresa parece tener suficientes activos corrientes (363,414,056.00) para cubrir sus pasivos corrientes (497,327,500.00), aunque la relación activo corriente / pasivo corriente de 0.73 indica que la empresa puede tener dificultades para cumplir con sus obligaciones a corto plazo. \n\nLa solvencia, que considera tanto los pasivos corrientes como no corrientes, parece saludable con una relación de activo total / deuda total de aproximadamente 1.47, lo que indica que la empresa tiene más activos que deudas. Sin embargo, gran parte de esta solvencia proviene de activos no corrientes.\n\nEn cuanto a la rentabilidad, no tenemos suficiente información para hacer una evaluación adecuada. Sería útil conocer las ganancias antes de intereses, impuestos, depreciación y amortización (EBITDA), y por supuesto, las ventas netas.\n\nAhora, algunas recomendaciones para mejorar la situación financiera de la empresa:\n\n1. Reducir la Deuda: Dado que la empresa tiene una cantidad significativa de deuda, podría dirigir un mayor porcentaje de sus ganancias futuras hacia la reducción de la deuda. Aunque el endeudamiento puede ser un instrumento útil para financiar operaciones y crecimiento, un nivel de endeudamiento demasiado elevado puede llevar al colapso financiero.\n\n2. Mejorar la gestión del capital de trabajo: La empresa puede buscar optimizar su gestión del capital de trabajo. Por ejemplo, puede tratar de acelerar las cobranzas (cuentas por cobrar) para mejorar su liquidez. También puede considerar maneras de reducir los niveles de inventario sin comprometer las ventas.\n\n3. Inversiones Inteligentes: Dado que la empresa tiene un monto considerable en propiedades, planta y equipo, podría explorar oportunidades para maximizar su rentabilidad, apalancando estos activos, posiblemente a través de la digitalización, modernización o la optimización de sus procesos y operaciones.\n\nDe igual manera, dada la situación de la empresa, podría ser prudente pausar o disminuir temporalmente cualquier expansión significativa hasta que su flujo de efectivo operativo mejore y los niveles de deuda se reduzcan.'
 
         # Guardar resultado en el modelo
         financial.gpt_prompt = f"{content}\n{prompt} "
