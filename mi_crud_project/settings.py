@@ -12,13 +12,14 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
-from dotenv import load_dotenv
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-ENV_PATH = BASE_DIR / 'mi_crud_project' / '.env'
 
-load_dotenv(dotenv_path=ENV_PATH)
+
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -26,12 +27,13 @@ load_dotenv(dotenv_path=ENV_PATH)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-)32-lw3x28)v$@nn5g$6cf#@llu5!+cazs)j$nnsb$grd+inv-'
 
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+#OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+OPENAI_API_KEY = env.str('OPENAI_API_KEY')
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Carpeta donde se recopilan los archivos estáticos
@@ -62,10 +64,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# Permitir solicitudes de tu frontend en desarrollo (ajusta el dominio según tu caso)
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:4200',  # Esto es para Angular en desarrollo
-]
+CORS_ALLOWED_ORIGINS = tuple(env.list('CORS', default=[]))
+
 
 ROOT_URLCONF = 'mi_crud_project.urls'
 
